@@ -1,0 +1,17 @@
+version: 2
+
+macros:
+  - name: deduplicate_iceberg
+    description: This macro performs deduplication on a table. It keeps only the most recent records for each unique key based on the specified order field.
+
+    arguments:
+      - name: source_table
+        description: "The table where duplicate records will be removed"
+      - name: order_by
+        description: "The field to determine which record to keep (ex: updated_at)"
+      - name: unique_key
+        description: "The unique identifier to group records by (ex: order_id)"
+
+    examples:
+      - description: "Using the deduplication macro for the 'orders' table"
+        code: deduplicate_iceberg(ref('orders'), 'updated_at', 'order_id') 
